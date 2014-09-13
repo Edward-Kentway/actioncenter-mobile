@@ -19,23 +19,55 @@ PUSH_REQUEST = {
   }
 }
 
-# # See https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW1
-# APNS_PUSH_REQUEST_PAYLOAD = {
-#   'type': 'object',
-#   'properties': {
-#     'alert': {'type': ['string', 'object'], 'format': 'apns_alert'},
-#     'badge': {'type': 'integer'},
-#     'sound': {'type': 'string'},
-#     'content-available': {'type': 'integer'}
-#   }
-# }
+# TODO(leah): Deal with the initial aps key structure + support for arbitrary keys within the dict
+#             containing the aps key.
 
-# APNS_ALERT_DICT = {
-#   'type': 'object',
-#   'properties': {
-#
-#   }
-# }
+# See https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW1
+APNS_PUSH_REQUEST_PAYLOAD = {
+  'type': 'object',
+  'properties': {
+    'alert': {
+      'type': ['string', 'object'],
+      'format': 'apns_alert'
+    },
+    'badge': {
+      'type': 'integer',
+      'required': False,
+      'help': 'the number to display as the badge of the application icon'
+    },
+    'sound': {
+      'type': 'string',
+      'required': False,
+      'help': 'the name of a sound file to play when the push notification is received'
+    },
+    'content-available': {
+      'type': 'integer',
+      'required': False,
+      'help': 'indicates that new Newsstand content is available'
+    }
+  }
+}
+
+APNS_ALERT_DICT = {
+  'type': 'object',
+  'properties': {
+    'body': {
+
+    },
+    'action-loc-key': {
+
+    },
+    'loc-key': {
+
+    },
+    'loc-args': {
+
+    },
+    'launch-image': {
+
+    }
+  }
+}
 
 # # See http://developer.android.com/google/gcm/server.html#payload for details of the payload.
 # # NOTE: this server only supports sending GCM messages via HTTP, so CCS parameters are not supported
