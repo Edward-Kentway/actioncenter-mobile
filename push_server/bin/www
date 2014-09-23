@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+// Default to development if undefined
+process.env.NODE_ENV = process.env.NODE_ENV === undefined ? 'development' : process.env.NODE_ENV;
+
+var server = require('../server');
+
+server.start();
