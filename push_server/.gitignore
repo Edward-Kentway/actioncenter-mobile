@@ -1,0 +1,5 @@
+www/templates/templates.js
+
+# Ignore everything in this directory
+/www/release/*
+!*/www/release/README.md

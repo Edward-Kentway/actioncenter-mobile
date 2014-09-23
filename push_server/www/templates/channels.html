@@ -1,0 +1,8 @@
+<div ng-repeat="channel in channels">
+
+  <input type="checkbox"
+         ng-model="notification.channels[$index]"
+         ng-true-value="{{channel}}"
+         ng-false-value="null" />
+
+</div>

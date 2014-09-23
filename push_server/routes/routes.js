@@ -19,7 +19,33 @@ var makePrefixedPath = function() {
   return path.join.apply(null, args);
 };
 
-var routes = [
+var staticRoutes = [
+
+  {
+    method: 'GET',
+    path: '/{filename}',
+    handler: {
+      file: function(request) {
+        return request.params.filename;
+      }
+    }
+  }
+
+];
+
+var templateRoutes = [
+
+  {
+    method: 'GET',
+    path: '/create_notification',
+    handler: function (request, reply) {
+      reply.view('index', {title: 'TODO'});
+    }
+  }
+
+];
+
+var apiRoutes = [
 
   {
     method: 'POST',
@@ -60,4 +86,4 @@ var routes = [
 ];
 
 module.exports.makePrefixedPath = makePrefixedPath;
-module.exports.routes = routes;
+module.exports.routes = [].concat(staticRoutes, templateRoutes, apiRoutes);
