@@ -4,6 +4,7 @@
 
 var path = require('path');
 
+var applicationConfig = require('config').get('APPLICATION');
 var notifications = require('./notifications');
 var subscriptions = require('./subscriptions');
 var notificationValidation = require('../validation/notifications');
@@ -39,7 +40,7 @@ var templateRoutes = [
     method: 'GET',
     path: '/create_notification',
     handler: function (request, reply) {
-      reply.view('index', {title: 'TODO'});
+      reply.view('index', applicationConfig);
     }
   }
 

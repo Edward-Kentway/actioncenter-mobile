@@ -1,0 +1,45 @@
+<div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Type</th>
+        <th colspan="2">Value</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="row in pushDataRows">
+
+        <td>
+          <input type="text" ng-model="pushDataRows[$index].key" />
+        </td>
+
+        <td>
+
+        </td>
+
+        <td>
+          <span ng-if="!pushRowIsBoolean($index)">
+            <input type="text" ng-model="pushDataRows[$index].value" />
+          </span>
+
+          <span ng-if="pushRowIsBoolean($index)">
+
+          </span>
+        </td>
+
+        <td>
+          <button ng-click="removeDataItem($index)">X</button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  <button ng-click="addDataItem()">Add Item</button>
+
+</div>

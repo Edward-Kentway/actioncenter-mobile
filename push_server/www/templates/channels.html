@@ -1,8 +1,10 @@
-<div ng-repeat="channel in channels">
+<div ng-repeat="(channel, selected) in selectedChannels">
 
-  <input type="checkbox"
-         ng-model="notification.channels[$index]"
-         ng-true-value="{{channel}}"
-         ng-false-value="null" />
+  <label>
+    <input type="checkbox"
+           ng-model="selectedChannels[channel]"
+           ng-change="toggleSupportedChannel(channel)" />
+    {[channel]}
+  </label>
 
 </div>
