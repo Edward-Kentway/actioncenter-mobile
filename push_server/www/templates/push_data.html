@@ -11,23 +11,33 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="row in pushDataRows">
+      <tr ng-repeat="row in dataModel.pushDataRows">
 
         <td>
-          <input type="text" ng-model="pushDataRows[$index].key" />
+          <input type="text" ng-model="dataModel.pushDataRows[$index].key" />
         </td>
 
         <td>
-          <select ng-model="pushDataRows[$index].type"
-                  ng-options="dataType for dataType in supportedDataTypes"></select>
+          <select ng-model="dataModel.pushDataRows[$index].type"
+                  ng-options="dataType for dataType in dataModel.supportedDataTypes"></select>
         </td>
 
         <td>
           <span ng-if="!pushRowIsBoolean($index)">
-            <input type="text" ng-model="pushDataRows[$index].value" />
+            <input type="text" ng-model="dataModel.pushDataRows[$index].value" />
           </span>
 
           <span ng-if="pushRowIsBoolean($index)">
+
+            <label>
+              True
+              <input type="radio" ng-model="dataModel.pushDataRows[$index].value" ng-value="true">
+            </label>
+
+            <label>
+              False
+              <input type="radio" ng-model="dataModel.pushDataRows[$index].value" ng-value="false">
+            </label>
 
           </span>
         </td>
@@ -44,3 +54,5 @@
   <button ng-click="addDataItem()">Add Item</button>
 
 </div>
+
+<div>PUSH DATA: {[dataModel.pushDataRows]}</div>

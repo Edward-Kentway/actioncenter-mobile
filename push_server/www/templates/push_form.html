@@ -1,5 +1,6 @@
 <div>
   <div ng-include="'channels.html'"></div>
   <div ng-include="'core_push_options.html'"></div>
-  <div ng-include="'push_data.html'"></div>
+  <div push-notification-data ng-model="notification.data"></div>
+  <textarea ng-model="workingModel.deviceIds"></textarea>
 </div>

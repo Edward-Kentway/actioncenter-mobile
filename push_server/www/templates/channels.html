@@ -1,8 +1,8 @@
-<div ng-repeat="(channel, selected) in selectedChannels">
+<div ng-repeat="(channel, selected) in workingModel.selectedChannels">
 
   <label>
     <input type="checkbox"
-           ng-model="selectedChannels[channel]"
+           ng-model="workingModel.selectedChannels[channel]"
            ng-change="toggleSupportedChannel(channel)" />
     {[channel]}
   </label>

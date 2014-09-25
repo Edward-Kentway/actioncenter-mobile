@@ -2,7 +2,6 @@
  * Base application definition for the Push Notification App.
  */
 
-var formController = require('./form_controller');
 require('../templates/templates');
 
 var pushNotificationApp = angular.module('PushNotificationApp', ['pushNotification.templates']);
@@ -11,5 +10,5 @@ pushNotificationApp.config(function($interpolateProvider) {
   $interpolateProvider.endSymbol(']}');
 });
 
-// Set up all application controllers
-pushNotificationApp.controller('PushNotificationFormController', formController);
+pushNotificationApp.controller('PushNotificationFormController', require('./form_controller'));
+pushNotificationApp.directive('pushNotificationData', require('./notification_data'));
