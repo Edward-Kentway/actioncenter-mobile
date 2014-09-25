@@ -38,6 +38,7 @@
   "APPLICATION": {
     "NAME": "Demo",
     "CSS_APP_URL": "push_server.min.css",
-    "JS_APP_URL": "push_server.min.js"
+    "JS_APP_URL": "push_server.min.js",
+    "API_VERSION": 1
   }
 }

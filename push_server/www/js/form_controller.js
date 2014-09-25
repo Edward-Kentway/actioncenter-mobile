@@ -2,7 +2,7 @@
  * Controller for the push notification form.
  */
 
-var PushNotificationFormController = function($scope) {
+var PushNotificationFormController = function($scope, $http) {
 
   // Handle channel actions
 
@@ -13,6 +13,21 @@ var PushNotificationFormController = function($scope) {
     } else {
       $scope.notification.channels.push(channel);
     }
+  };
+
+  $scope.submitNotification = function() {
+    var isValid = true;
+    var data = {};
+    var url = '/api/' + pushServerSettings['APPLICATION']['API_VERSION'] + '/notifications';
+
+    $http
+      .post(url, data)
+      .success(function(data, status, headers, config) {
+        // TODO(leah): Redirect the user to the notifications page showing the details of the notification that was just created
+      })
+      .error(function(data, status, headers, config) {
+        // TODO(leah): Show some kind of inline validation
+      });
   };
 
   // NOTE: pushServerSettings is brought in via a build step, see gulpfile for details

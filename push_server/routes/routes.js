@@ -10,8 +10,7 @@ var subscriptions = require('./subscriptions');
 var notificationValidation = require('../validation/notifications');
 var subscriptionValidation = require('../validation/subscriptions');
 
-var API_VERSION = '1';
-var API_PREFIX = '/api/' + API_VERSION;
+var API_PREFIX = '/api/' + applicationConfig.get('API_VERSION');
 
 var makePrefixedPath = function() {
   var args = Array.prototype.slice.call(arguments);
