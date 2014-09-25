@@ -29,7 +29,7 @@ var PushNotificationFormController = function($scope) {
   // Handle push data actions
 
   $scope.makePushDataRow = function() {
-    return {key: '', type: '', value: ''};
+    return {key: '', type: 'string', value: ''};
   };
 
   $scope.addDataItem = function() {
@@ -59,7 +59,7 @@ var PushNotificationFormController = function($scope) {
     title: '',
     message: '',
     sound: '',
-    data: '',
+    data: {},
 
     // admin variables
     channels: _.cloneDeep(channels)
@@ -69,14 +69,28 @@ var PushNotificationFormController = function($scope) {
     return true;
   }));
 
-  $scope.supportedDataTypes = {
-    'string': '',
-    'integer': '',
-    'float': '',
-    'boolean': ''
+  $scope.dataTypeConverters = {
+    'integer': parseInt,
+    'float': parseFloat
   };
+  $scope.supportedDataTypes = ['string', 'integer', 'float', 'boolean'];
 
   $scope.pushDataRows = [$scope.makePushDataRow()];
+
+  // push the (optionally) converted push data values into the notification object
+  $scope.$watch('pushDataRows', function(newValue, oldValue) {
+    if (_.isArray(newValue)) {
+      $scope.notification.data = {};
+      for (var i = 0, pushRow, converter, value; i < newValue.length; ++i) {
+        pushRow = newValue[i];
+        if (pushRow.key !== '' && pushRow.value !== '') {
+          converter = $scope.dataTypeConverters[pushRow.type];
+          value = !_.isUndefined(converter) ? converter(pushRow.value) : pushRow.value;
+          $scope.notification.data[pushRow.key] = value;
+        }
+      }
+    }
+  }, true);
 
 };
 

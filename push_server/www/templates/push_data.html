@@ -18,7 +18,8 @@
         </td>
 
         <td>
-
+          <select ng-model="pushDataRows[$index].type"
+                  ng-options="dataType for dataType in supportedDataTypes"></select>
         </td>
 
         <td>
