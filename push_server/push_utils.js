@@ -3,23 +3,27 @@
  */
 
 var apn = require('apn');
+
+var credentials = require('config').get('CREDENTIALS');
 var pushConfig = require('config').get('PUSH');
 
-var configureAPNSFeedback =  function() {
+var configurePushServices = function() {
+  configureAPNSFeedback();
+};
 
-  // TODO(leah): update this once certs are available.
-  return;
+var configureAPNSFeedback = function() {
 
   var options = {
+    'key': credentials.get('APNS').get('KEY_FILE'),
+    'cert': credentials.get('APNS').get('CERT_FILE'),
     'batchFeedback': true,
     'interval': pushConfig.get('APNS_FEEDBACK_INTERVAL')
   };
 
-  // Configure the APNS feedback service
   var feedback = new apn.Feedback(options);
   feedback.on('feedback', function(devices) {
     devices.forEach(function(item) {
-      // Do something with item.device and item.time;
+      // TODO(leah): Prune the device from our db
     });
   });
 };
@@ -28,5 +32,5 @@ var pruneAndroidDeviceId = function() {
 
 };
 
+module.exports.configurePushServices = configurePushServices;
 module.exports.pruneAndroidDeviceId = pruneAndroidDeviceId;
-module.exports.configureAPNSFeedback = configureAPNSFeedback;

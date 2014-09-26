@@ -30,6 +30,11 @@ var defaultOptions = {
 var server = new hapi.Server(serverConfig.URL, serverConfig.PORT, defaultOptions);
 server.route(require('./routes/routes').routes);
 
-pushUtils.configureAPNSFeedback();
+var options = {
+  cert: '',
+  key: ''
+};
+
+pushUtils.configurePushServices();
 
 module.exports = server;
