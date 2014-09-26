@@ -31,6 +31,4 @@ var deleteSubscription = function(deviceId, success, error) {
     .error(fetchError);
 };
 
-
-
 module.exports.deleteSubscription = deleteSubscription;

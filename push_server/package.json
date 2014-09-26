@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "export NODE_ENV=test ; mocha"
+    "test": "export NODE_ENV=test ; mocha --recursive"
   },
   "dependencies": {
     "apn": "^1.6.2",
+    "async": "^0.9.0",
     "config": "^1.2.0",
     "handlebars": "^2.0.0",
     "hapi": "^6.8.1",

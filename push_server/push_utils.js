@@ -3,6 +3,7 @@
  */
 
 var apn = require('apn');
+var lodash = require('lodash');
 
 var credentials = require('config').get('CREDENTIALS');
 var modelUtils = require('./db/model_utils');
@@ -24,7 +25,7 @@ var configureAPNSFeedback = function() {
   var feedback = new apn.Feedback(options);
   feedback.on('feedback', function(devices) {
 
-    _.forEach(devices, function(item) {
+    lodash.forEach(devices, function(item) {
       var error = function(err) {
         console.log(
           'Unable to delete subscription to APNS with deviceId: ' + item.device + '\n err: ' + err);

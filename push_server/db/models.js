@@ -51,11 +51,5 @@ var Notifications = db.define(
   }
 );
 
-db
-  .sync()
-  .failure(function(error) {
-    console.log('Unable to synchronize database: ' + error);
-  });
-
 module.exports.Notifications = Notifications;
 module.exports.Subscriptions = Subscriptions;

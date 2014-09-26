@@ -75,6 +75,18 @@ var apiRoutes = [
   },
 
   {
+    method: 'GET',
+    path: makePrefixedPath('notifications/{notificationId}'),
+    handler: notifications.getNotification
+  },
+
+  {
+    method: 'GET',
+    path: makePrefixedPath('notifications'),
+    handler: notifications.getNotifications
+  },
+
+  {
     method: 'POST',
     path: makePrefixedPath('subscriptions'),
     handler: subscriptions.addSubscription,
