@@ -12,3 +12,4 @@ pushNotificationApp.config(function($interpolateProvider) {
 
 pushNotificationApp.controller('PushNotificationFormController', require('./form_controller'));
 pushNotificationApp.directive('pushNotificationData', require('./notification_data'));
+pushNotificationApp.factory('pushServerAPI', require('./api'));
