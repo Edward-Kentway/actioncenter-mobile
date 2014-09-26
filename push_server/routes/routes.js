@@ -19,6 +19,18 @@ var makePrefixedPath = function() {
   return path.join.apply(null, args);
 };
 
+var baseRoutes = [
+
+  {
+    path: '/',
+    method: 'GET',
+    handler: function(request, reply) {
+      return reply.redirect('/create_notification');
+    }
+  }
+
+];
+
 var staticRoutes = [
 
   {
@@ -86,4 +98,4 @@ var apiRoutes = [
 ];
 
 module.exports.makePrefixedPath = makePrefixedPath;
-module.exports.routes = [].concat(staticRoutes, templateRoutes, apiRoutes);
+module.exports.routes = baseRoutes.concat(staticRoutes, templateRoutes, apiRoutes);
