@@ -5,6 +5,7 @@
 var apn = require('apn');
 
 var credentials = require('config').get('CREDENTIALS');
+var modelUtils = require('./db/model_utils');
 var pushConfig = require('config').get('PUSH');
 
 var configurePushServices = function() {
@@ -22,9 +23,16 @@ var configureAPNSFeedback = function() {
 
   var feedback = new apn.Feedback(options);
   feedback.on('feedback', function(devices) {
-    devices.forEach(function(item) {
-      // TODO(leah): Prune the device from our db
+
+    _.forEach(devices, function(item) {
+      var error = function(err) {
+        console.log(
+          'Unable to delete subscription to APNS with deviceId: ' + item.device + '\n err: ' + err);
+      };
+
+      modelUtils.deleteSubscription(item.device, null, error);
     });
+
   });
 };
 

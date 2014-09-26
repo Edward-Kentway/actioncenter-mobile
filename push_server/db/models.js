@@ -2,10 +2,11 @@
  * Database models for working with the push server.
  */
 
+var sequelize = require('sequelize');
+
 var dbConfig = require('config').get('DATABASE');
 var supportedChannels = require('config').get('SUPPORTED_CHANNELS');
 var db = require('./db');
-var sequelize = require('sequelize');
 
 // Sqlite doesn't play nicely with a bigint specified as the pk, so use a conditional to alias it
 var bigIntegerPrimaryKey = db.options.dialect === 'sqlite' ? sequelize.INTEGER : sequelize.BIGINT;

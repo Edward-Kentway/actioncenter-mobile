@@ -3,6 +3,7 @@
  */
 
 var assert = require('assert');
+
 var subscriptionValidation = require('../validation/subscriptions');
 
 describe('Validation', function() {

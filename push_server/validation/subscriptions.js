@@ -3,6 +3,7 @@
  */
 
 var Joi = require('joi');
+
 var supportedChannels = require('config').get('SUPPORTED_CHANNELS');
 var validationUtils = require('./utils');
 

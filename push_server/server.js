@@ -9,7 +9,7 @@ var path = require('path');
 var pushUtils = require('./push_utils');
 var serverConfig = require('config').get('SERVER');
 
-var db = require('./db');
+var db = require('./db/db');
 
 var defaultOptions = {
   files: {

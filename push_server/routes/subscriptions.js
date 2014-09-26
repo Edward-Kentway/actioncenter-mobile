@@ -2,31 +2,26 @@
  * Handlers for dealing with subscribing devices and deleting subscriptions.
  */
 
-var models = require('../models');
+var models = require('../db/models');
+var modelUtils = require('../db/model_utils');
 
 module.exports.deleteSubscription = function(request, reply) {
   var deviceId = request.params.deviceId;
 
-  models.Subscriptions
-    .find({where: {deviceId: deviceId}})
-    .success(function(subscription) {
-      if (subscription) {
-        subscription
-          .destroy()
-          .success(function() {
-            reply({deleted: true});
-          })
-          .error(function(err) {
-            console.log(err);
-            // TODO(leah): Raise a 500
-          });
-      } else {
-        reply('no subscription found for deviceId: ' + deviceId).code(404);
-      }
-    })
-    .error(function() {
-      // TODO(leah): raise a 500
-    });
+  var success = function(subscriptionDeleted) {
+    if (subscriptionDeleted) {
+      reply({deviceId: deviceId, deleted: true});
+    } else {
+      reply({deviceId: deviceId, deleted: false}).code(404);
+    }
+  };
+
+  var error = function() {
+    // TODO(leah): Figure out how to deal with the 500
+    // reply({deleted: false});
+  };
+
+  modelUtils.deleteSubscription(deviceId, success, error);
 };
 
 

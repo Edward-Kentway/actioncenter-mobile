@@ -2,7 +2,7 @@
  * Route handlers for all notification routes.
  */
 
-var models = require('../models');
+var models = require('../db/models');
 
 module.exports.addNotification = function(request, reply) {
   models.Notifications

@@ -3,7 +3,8 @@
  */
 
 var assert = require('assert');
-var models = require('../models');
+
+var models = require('../db/models');
 var serverRoutes = require('../routes/routes');
 var server = require('../server');
 
