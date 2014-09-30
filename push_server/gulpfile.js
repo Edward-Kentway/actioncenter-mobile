@@ -1,5 +1,5 @@
 /**
- * Gulp file for building and running all ACM tasks.
+ * Gulp file for building and running all Push Server tasks.
  */
 
 var browserify = require('gulp-browserify');

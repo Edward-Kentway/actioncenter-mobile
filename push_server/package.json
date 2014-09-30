@@ -26,6 +26,7 @@
     "gulp-concat": "^2.4.1",
     "gulp-header": "^1.1.1",
     "gulp-insert": "^0.4.0",
+    "gulp-mocha": "^1.1.0",
     "gulp-util": "^3.0.1",
     "mocha": "^1.21.4"
   }

@@ -2,6 +2,8 @@
  * Route handlers for all notification routes.
  */
 
+var hapi = require('hapi');
+
 var models = require('../db/models');
 
 var addNotification = function(request, reply) {
@@ -13,14 +15,22 @@ var addNotification = function(request, reply) {
       reply({notificationId: notification.notificationId});
     })
     .error(function(err) {
-      console.log('failed to add notification: ' + err);
-      // TODO(leah): raise a 500
+      hapi.error.internal('unable to add the notification', err);
     });
 };
 
 
 var getNotification = function(request, reply) {
-
+  models.Notifications
+    .find({where: {notificationId: request.notificationId}})
+    .success(function(notification) {
+      reply(notification.values);
+    })
+    .error(function(err) {
+      console.log('----------------');
+//            hapi.error.internal('unable to add the notification', err);
+      hapi.error.notFound('notification not found');
+    });
 };
 
 

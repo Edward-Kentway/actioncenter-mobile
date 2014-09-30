@@ -27,7 +27,7 @@ module.exports.deleteSubscription = function(request, reply) {
 
 module.exports.addSubscription = function(request, reply) {
   models.Subscriptions
-    .findOrCreate({deviceId: request.payload.deviceId}, request.payload)
+    .findOrCreate({where: {deviceId: request.payload.deviceId}}, request.payload)
     .success(function(subscription, created) {
       reply({
         channel: subscription.channel,
@@ -37,5 +37,6 @@ module.exports.addSubscription = function(request, reply) {
     })
     .error(function(error) {
       // TODO(leah): raise a 500
+      console.log('ADD SUB ERROR: ' + error);
     });
 };

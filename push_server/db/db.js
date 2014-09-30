@@ -1,12 +1,12 @@
 /**
- * Database access.
+ * Push server database instantiation.
  */
 
-var sequelize = require('sequelize');
+var Sequelize = require('sequelize');
 
 var dbConfig = require('config').get('DATABASE');
 
-var db = new sequelize(
+var db = new Sequelize(
   dbConfig.get('DB_NAME'), dbConfig.get('USERNAME'), dbConfig.get('PASSWORD'),
   dbConfig.get('OPTIONS'));
 
