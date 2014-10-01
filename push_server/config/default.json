@@ -2,7 +2,8 @@
   "DEBUG": false,
   "SERVER": {
     "URL": "127.0.0.1",
-    "PORT": 3000
+    "PORT": 3000,
+    "CACHE_TEMPLATES": true
   },
   "PUSH": {
     "APNS_FEEDBACK_INTERVAL": 43200 // default to 12 hours

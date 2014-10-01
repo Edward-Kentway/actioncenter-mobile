@@ -23,7 +23,8 @@ var defaultOptions = {
         compileMode: 'sync'
       }
     },
-    compileMode: 'async', isCached: false
+    compileMode: 'async',
+    isCached: serverConfig.get('CACHE_TEMPLATES')
   }
 };
 
