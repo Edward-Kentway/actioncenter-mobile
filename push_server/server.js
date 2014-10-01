@@ -23,7 +23,7 @@ var defaultOptions = {
         compileMode: 'sync'
       }
     },
-    compileMode: 'async'
+    compileMode: 'async', isCached: false
   }
 };
 
