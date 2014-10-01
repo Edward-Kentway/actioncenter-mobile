@@ -4,9 +4,10 @@
 
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
-var config = require('config');
 var gulp = require('gulp');
+var gulpExit = require('gulp-exit');
 var gulpInsert = require('gulp-insert');
+var gulpMocha = require('gulp-mocha');
 var gutil = require('gulp-util');
 var header = require('gulp-header');
 var minifyHTML = require('gulp-minify-html');
@@ -28,6 +29,7 @@ var targets = {
 };
 
 var buildConstants = function() {
+  var config = require('config');
   // Build an abbreviated version of the constants to pass through to the frontend
   var constants = {
     SUPPORTED_CHANNELS: config.get('SUPPORTED_CHANNELS'),
@@ -35,6 +37,15 @@ var buildConstants = function() {
   };
   return 'var pushServerSettings = ' + JSON.stringify(constants) + ';\n\n';
 };
+
+gulp.task('test', function() {
+  process.env.NODE_ENV = 'test';
+  return gulp.src('./test/**/*.js')
+    .pipe(gulpMocha({reporter: 'spec'}))
+    // NOTE: gulpExit is used here as otherwise the task hangs, see:
+    //   github.com/sindresorhus/gulp-mocha/pull/31
+    .pipe(gulpExit());
+});
 
 gulp.task('css', function() {
   gulp.src([path.join(WWW_DIR, 'css/push_server.css')])

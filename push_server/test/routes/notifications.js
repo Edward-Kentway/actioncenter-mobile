@@ -18,7 +18,7 @@ describe('NotificationRouteHandlers', function() {
     server.inject(addNotificationOptions, function(response) {
       models.Notifications
         .find({where: {notificationId: 1}})
-        .success(function(notification) {
+        .on('success', function(notification) {
           assert.notEqual(null, notification);
           done();
         });

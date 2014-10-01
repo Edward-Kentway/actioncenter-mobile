@@ -10,13 +10,15 @@ var server = require('../../server');
 
 describe('SubscriptionRouteHandlers', function() {
 
-  var validSubscription = {
-    channel: 'APNS',
-    language: 'en',
-    deviceId: 'pretenddevicetoken'
-  };
   var addSubscriptionOptions = {
-    method: 'POST', url: serverRoutes.makePrefixedPath('subscriptions'), payload: validSubscription};
+    method: 'POST',
+    url: serverRoutes.makePrefixedPath('subscriptions'),
+    payload: {
+      channel: 'APNS',
+      language: 'en',
+      deviceId: 'pretend_device_token'
+    }
+  };
 
   it('should add a subscription to the database', function(done) {
     server.inject(addSubscriptionOptions, function(response) {
@@ -25,10 +27,10 @@ describe('SubscriptionRouteHandlers', function() {
 
       models.Subscriptions
         .find({where: {subscriptionId: 1}})
-        .success(function(subscription) {
+        .on('success', function(subscription) {
           assert.notEqual(null, subscription);
           done();
-        })
+        });
     });
   });
 
@@ -46,7 +48,7 @@ describe('SubscriptionRouteHandlers', function() {
     server.inject(deleteSubscriptionOptions, function(response) {
       models.Subscriptions
         .find({where: {deviceId: sampleDeviceId}})
-        .success(function(subscription) {
+        .on('success', function(subscription) {
           assert.equal(null, subscription);
           done();
         })

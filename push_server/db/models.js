@@ -23,7 +23,17 @@ var Subscriptions = db.define(
   },
   {
     tableName: 'subscriptions',
-    schema: dbConfig.schema
+    schema: dbConfig.schema,
+
+    instanceMethods: {
+      externalize: function() {
+        return {
+          channel: this.channel,
+          language: this.language,
+          deviceId: this.deviceId
+        };
+      }
+    }
   }
 );
 
@@ -43,6 +53,13 @@ var Notifications = db.define(
     setterMethods: {
       payload: function(value) {
         return this.setDataValue('payload', JSON.stringify(value));
+      }
+    },
+
+    instanceMethods: {
+      externalize: function() {
+        // TODO(leah): Update this to be less absurd
+        return {notificationId: this.notificationId};
       }
     },
 

@@ -10,10 +10,10 @@ var deleteSubscription = function(deviceId, success, error) {
     if (subscription) {
       subscription
         .destroy()
-        .success(function() {
+        .on('success', function() {
           success(true);
         })
-        .error(function(err) {
+        .on('error', function(err) {
           error(err);
         });
     } else {
@@ -27,8 +27,8 @@ var deleteSubscription = function(deviceId, success, error) {
 
   models.Subscriptions
     .find({where: {deviceId: deviceId}})
-    .success(recordFound)
-    .error(fetchError);
+    .on('success', recordFound)
+    .on('error', fetchError);
 };
 
 module.exports.deleteSubscription = deleteSubscription;

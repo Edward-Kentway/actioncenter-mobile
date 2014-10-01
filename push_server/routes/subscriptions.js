@@ -5,6 +5,7 @@
 var models = require('../db/models');
 var modelUtils = require('../db/model_utils');
 
+
 module.exports.deleteSubscription = function(request, reply) {
   var deviceId = request.params.deviceId;
 
@@ -26,17 +27,34 @@ module.exports.deleteSubscription = function(request, reply) {
 
 
 module.exports.addSubscription = function(request, reply) {
+
+  var error = function(error) {
+    // TODO(leah): raise a 500
+    console.log('ADD SUB ERROR: ' + error);
+  };
+
+  var success = function(res) {
+    var instance = res[0];
+    var initialized = res[1];
+
+    if (initialized) {
+      instance.save().on('success', function (newInstance) {
+        reply(newInstance.externalize()).code(200);
+      });
+    } else {
+      reply(instance.externalize()).code(201);
+    }
+  };
+
+  var params = {
+    where: {deviceId: request.payload.deviceId},
+    defaults: request.payload
+  };
+
+  // NOTE: this is using findOrInitialize + a separate save as findOrCreate is throwing a spurious
+  //       error under Sequelize 2.0.0-rc1
   models.Subscriptions
-    .findOrCreate({where: {deviceId: request.payload.deviceId}}, request.payload)
-    .success(function(subscription, created) {
-      reply({
-        channel: subscription.channel,
-        language: subscription.language,
-        deviceId: subscription.deviceId
-      }).code(created ? 200 : 201);
-    })
-    .error(function(error) {
-      // TODO(leah): raise a 500
-      console.log('ADD SUB ERROR: ' + error);
-    });
+    .findOrInitialize(params)
+    .on('success', success)
+    .on('error', error);
 };

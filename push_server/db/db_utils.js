@@ -4,10 +4,10 @@
 
 var db = require('./db');
 
-var syncDatabase = function(success, failure) {
+var syncDatabase = function(success, failure, force) {
 
   db
-    .sync()
+    .sync({force: !!force})
     .on('success', success)
     .on('failure', failure);
 
