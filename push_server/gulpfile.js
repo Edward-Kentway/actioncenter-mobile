@@ -87,7 +87,8 @@ gulp.task('js', ['templates', 'jsBuild']);
 
 gulp.task('watch', function() {
   gulp.watch('www/js/**/*.js', ['js']);
-  gulp.watch(['www/templates/**/*.html', 'www/index.html'], ['js']);
+  gulp.watch(['www/templates/**/*.html'], ['js']);
+  gulp.watch('www/index.html', ['templates']);
   gulp.watch('www/css/**/*.css', ['css']);
 });
 

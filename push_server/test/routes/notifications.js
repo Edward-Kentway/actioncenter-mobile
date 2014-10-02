@@ -16,17 +16,26 @@ describe('NotificationRouteHandlers', function() {
       method: 'POST', url: serverRoutes.makePrefixedPath('notifications'), payload: validNotification};
 
     server.inject(addNotificationOptions, function(response) {
+      //      assert.equal(validNotification.title, response.payload.title);
       models.Notifications
         .find({where: {notificationId: 1}})
         .on('success', function(notification) {
-          assert.notEqual(null, notification);
+          assert.equal(1, notification.notificationId);
           done();
         });
     });
   });
 
   it('should get a notification from the database', function(done) {
-    done();
+    var getNotificationOptions = {
+      method: 'GET',
+      url: serverRoutes.makePrefixedPath('notifications/' + 1)
+    };
+    server.inject(getNotificationOptions, function(response) {
+//      console.log(response);
+//      assert.equal(response.payload.title, 'title');
+      done();
+    });
   });
 
   it('should get a list of notifications from the database', function(done) {

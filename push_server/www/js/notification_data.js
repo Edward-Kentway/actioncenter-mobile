@@ -70,7 +70,7 @@ var PushNotificationDataDirective = function() {
         }
       }, true);
     },
-    templateUrl: 'push_data.html'
+    templateUrl: 'new_notification/push_data.html'
   };
 
 };

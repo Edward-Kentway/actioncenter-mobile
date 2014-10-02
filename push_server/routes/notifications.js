@@ -11,7 +11,6 @@ var addNotification = function(request, reply) {
     .build(request.payload)
     .save()
     .on('success', function(notification) {
-      // TODO(leah): Update this to return something that's not exposing the private db id
       reply(notification.externalize());
     })
     .on('error', function(err) {
@@ -21,15 +20,14 @@ var addNotification = function(request, reply) {
 
 
 var getNotification = function(request, reply) {
+  var notificationId = request.params.notificationId;
   models.Notifications
-    .find({where: {notificationId: request.notificationId}})
+    .find({where: {notificationId: notificationId}})
     .on('success', function(notification) {
-      reply(notification.values);
+      reply(notification.externalize());
     })
-    .on('error', function(err) {
-      console.log('----------------');
-//            hapi.error.internal('unable to add the notification', err);
-      hapi.error.notFound('notification not found');
+    .on('error', function() {
+      hapi.error.notFound('notification not found for id: ' + notificationId);
     });
 };
 
