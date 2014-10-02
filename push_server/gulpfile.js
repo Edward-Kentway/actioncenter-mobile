@@ -48,7 +48,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('css', function() {
-  gulp.src([path.join(WWW_DIR, 'css/bootstrap.min.css')], [path.join(WWW_DIR, 'css/push_server.css')])
+  gulp.src([path.join(WWW_DIR, '/css/*.css')])
     .on('error', gutil.log)
     .pipe(concat('push_server.min.css'))
     .pipe(gulp.dest(RELEASE_DIR));

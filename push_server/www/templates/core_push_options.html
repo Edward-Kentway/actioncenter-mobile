@@ -1,20 +1,25 @@
-<div>
-  <label>
-    Title
-    <input type="text" ng-model="notification.title">
-  </label>
-</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Basic settings</div>
+  <div class="panel-body">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-1" for="notification-title">
+          Title
+        </label>
+        <div class="col-sm-11">
+          <input id="notification-title" class='form-control' type="text" ng-model="notification.title">
+        </div>
+      </div>
 
-<div>
-  <label>
-    Message
-    <input type="text" ng-model="notification.message">
-  </label>
-</div>
+      <div class="form-group">
+        <label class="control-label col-sm-1" for="notification-message">
+          Message
+        </label>
+        <div class="col-sm-11">
+          <input id="notification-message" class='form-control' type="text" ng-model="notification.message">
+        </div>
+      </div>
 
-<div>
-  <label>
-    Sound
-    <input type="text" ng-model="notification.sound">
-  </label>
+    </div>
+  </div>
 </div>

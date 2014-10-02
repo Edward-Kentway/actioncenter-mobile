@@ -2,12 +2,16 @@
  * Basic CSS for the push notification app.
  */
 
-body {
-  padding-top: 60px;
-}
 
-@media (max-width: 979px) {
-  body {
-    padding-top: 0px;
-  }
+.form-inline .form-control, .form-inline .btn {
+	margin-right: 10px;
+}
+.push-data-row {
+	margin-bottom:10px;
+}
+.panel-heading a h4 {
+	color: #fff;
+}
+.radio-inline {
+	margin-right: 10px;
 }
